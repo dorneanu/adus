@@ -54,6 +54,7 @@ BIN_UNZIP=$(check_command unzip)
 
 BIN_APKTOOL=$DIR_TOOLS/apktool/apktool-cli.jar
 BIN_SIGNAPK=$DIR_TOOLS/signapk/signapk.jar
+BIN_DEX2JAR=$DIR_TOOLS/dex2jar/current/d2j-dex2jar.sh
 
 verbose=1
 
@@ -215,6 +216,28 @@ function apk_unpack {
     fi
 }
 
+## Converts classes.dex to jar file
+##      @1: dex file
+function apk_dex2jar {
+    output_file=$DIR_UNPACK/classes-dex2jar.jar
+    log INFO "Converting $1 to JAR ... "
+    cmd="$BIN_DEX2JAR --force $1 -o $output_file"
+
+    # Check for verbosity
+    if (( ! verbose )); then
+        cmd="$cmd > /dev/null 2>&1"
+    fi
+
+    eval $cmd
+
+    # Check for errors
+    if [ $? -ne 0 ]; then
+        log ERROR "Couldn't convert DEX file."
+    else
+        log INFO "Success! Converted file is at $output_file"
+    fi
+}
+
 ## Prints this script help description message
 function adus_usage {
     echo ""
@@ -233,6 +256,7 @@ function adus_usage {
     echo -ne " -d <app_path> \t\t\t Dump APK to $DIR_SOURCE\n"
     echo -ne " -s <app_path> \t\t\t Sign APK using test certificate\n"
     echo -ne " -u <app_path> \t\t\t Unpack APK to $DIR_UNPACK\n"
+    echo -ne " -x <dex_path> \t\t\t Convert DEX to JAR\n3"
     echo -ne " -q \t\t\t\t Be quite. Deactivate verbosity.\n"
     echo -ne " -0 <app_path> \t\t\t Dump (-d) and unpack (-u) APK\n"
     echo -ne " -1 <app_path> \t\t\t Build (-b) and sign (-s)\n"
@@ -242,7 +266,7 @@ function adus_usage {
 
 
 # Check for arguments
-while getopts ":b:d:s:u:0:1:q" o; do
+while getopts ":b:d:s:u:x:0:1:q" o; do
     case "${o}" in
         h|\?)
             adus_usage
@@ -263,6 +287,10 @@ while getopts ":b:d:s:u:0:1:q" o; do
         u)
             u=${OPTARG}
             apk_unpack $u
+            ;;
+        x)
+            dex=${OPTARG}
+            apk_dex2jar $dex
             ;;
         q)
             verbose=0

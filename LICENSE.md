@@ -30,3 +30,7 @@ Released under the Apache 2.0 License
 # signapk
 
 Released under the Apache 2.0 License
+
+# dex2jar
+
+Released under the Apache 2.0 License

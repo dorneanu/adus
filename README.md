@@ -5,6 +5,17 @@ ADUS got born.
 
 Its basically only a BASH script ment to glue things together and make my life easier. Feel free to adapt it to your needs. Pull requests are highly welcome.
 
+# Requirements
+
+* adus.sh
+  + bash :)
+* apktool
+  + Java >= 1.7.x ([link](https://code.google.com/p/android-apktool/wiki/BuildApktool#Requirements))
+  + aapt (Android Asset Packaging Tool) in $PATH (usually found iandroid-sdk/build-tools/*)
+* signapk
+  + no specific requirements
+
+
 # Run 
 
 ADUS is very easy to use. Have a look at the available options:
