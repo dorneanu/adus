@@ -31,7 +31,7 @@ Available options:
 
 ~~~
 
-# Example
+# Examples
 
 ### Unpack and dump APK
 
@@ -96,3 +96,7 @@ I: Building apk file...
 [2014-09-04 20:52:06] INFO: Signing FakeBanker-NEW.apk ...
 [2014-09-04 20:52:06] INFO: Success! FakeBanker-NEW.SIGNED.apk is your signed APK.
 ~~~
+
+# License
+
+Released under the MIT License. 
