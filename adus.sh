@@ -44,15 +44,16 @@ function check_command {
 DIR_TOOLS=./tools
 DIR_UNPACK=./unpacked
 DIR_SOURCE=./source
+DIR_SIGNAPK=$DIR_TOOLS/signapk
 
 # Binaries
 BIN_GIT=$(check_command git)
 BIN_JAVA=$(check_command java)
 BIN_UNZIP=$(check_command unzip)
 
-DIR_SIGNAPK=$DIR_TOOLS/sign
-BIN_APKTOOL=$DIR_TOOLS/apktool-cli.jar
-BIN_SIGNAPK=$DIR_TOOLS/sign/dist/signapk.jar
+
+BIN_APKTOOL=$DIR_TOOLS/apktool/apktool-cli.jar
+BIN_SIGNAPK=$DIR_TOOLS/signapk/signapk.jar
 
 verbose=1
 
@@ -120,8 +121,8 @@ function apk_sign {
     signed_apk=`basename $1 .apk`.SIGNED.apk
     log INFO "Signing $1 ..."
     cmd="$BIN_JAVA -jar $BIN_SIGNAPK \
-              $DIR_TOOLS/sign/testkey.x509.pem \
-              $DIR_TOOLS/sign/testkey.pk8 \
+              $DIR_SIGNAPK/testkey.x509.pem \
+              $DIR_SIGNAPK/testkey.pk8 \
               $1 \
               $signed_apk"
 
