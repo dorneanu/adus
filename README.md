@@ -7,12 +7,14 @@ Its basically only a BASH script ment to glue things together and make my life e
 
 # Requirements
 
-* adus.sh
+* *adus.sh*
   + bash :)
-* apktool
+* *apktool*
   + Java >= 1.7.x ([link](https://code.google.com/p/android-apktool/wiki/BuildApktool#Requirements))
-  + aapt (Android Asset Packaging Tool) in $PATH (usually found iandroid-sdk/build-tools/*)
-* signapk
+  + aapt (Android Asset Packaging Tool) in $PATH (usually found in android-sdk/build-tools/*)
+* *signapk*
+  + no specific requirements
+* *dex2jar*
   + no specific requirements
 
 
