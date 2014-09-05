@@ -256,7 +256,7 @@ function adus_usage {
     echo -ne " -d <app_path> \t\t\t Dump APK to $DIR_SOURCE\n"
     echo -ne " -s <app_path> \t\t\t Sign APK using test certificate\n"
     echo -ne " -u <app_path> \t\t\t Unpack APK to $DIR_UNPACK\n"
-    echo -ne " -x <dex_path> \t\t\t Convert DEX to JAR\n3"
+    echo -ne " -x <dex_path> \t\t\t Convert DEX to JAR\n"
     echo -ne " -q \t\t\t\t Be quite. Deactivate verbosity.\n"
     echo -ne " -0 <app_path> \t\t\t Dump (-d) and unpack (-u) APK\n"
     echo -ne " -1 <app_path> \t\t\t Build (-b) and sign (-s)\n"

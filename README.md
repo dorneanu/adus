@@ -36,9 +36,11 @@ Available options:
  -d <app_path>           Dump APK to ./source
  -s <app_path>           Sign APK using test certificate
  -u <app_path>           Unpack APK to ./unpacked
+ -x <dex_path>           Convert DEX to JAR
  -q                      Be quite. Deactivate verbosity.
  -0 <app_path>           Dump (-d) and unpack (-u) APK
  -1 <app_path>           Build (-b) and sign (-s)
+
 
 ~~~
 
@@ -107,6 +109,19 @@ I: Building apk file...
 [2014-09-04 20:52:06] INFO: Signing FakeBanker-NEW.apk ...
 [2014-09-04 20:52:06] INFO: Success! FakeBanker-NEW.SIGNED.apk is your signed APK.
 ~~~
+
+
+### Convert dex to jar
+
+Using dex2jar you'll be able to convert the `classes.dex` into a `jar` file.
+
+~~~ shell
+./adus.sh -x unpacked/classes.dex
+[2014-09-04 20:53:14] INFO: Converting unpacked/classes.dex to JAR ... 
+dex2jar unpacked/classes.dex -> ./unpacked/classes-dex2jar.jar
+[2014-09-04 20:53:17] INFO: Success! Converted file is at ./unpacked/classes-dex2jar.jar
+~~~
+
 
 # License
 
