@@ -41,7 +41,8 @@ function check_command {
 ## Configuration stuff
 
 # Dirctories
-DIR_TOOLS=./tools
+CWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+DIR_TOOLS=$CWD/tools
 DIR_UNPACK=./unpacked
 DIR_SOURCE=./source
 DIR_SIGNAPK=$DIR_TOOLS/signapk

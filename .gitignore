@@ -1,3 +1,4 @@
 *.apk
 source
 unpacked
+*.sw[op]
