@@ -18,6 +18,10 @@ Its basically only a BASH script ment to glue things together and make my life e
   + no specific requirements
 
 
+# Installation
+
+You can download/clone the package wherever you want and call `./adus.sh` from there. Since the GIT repo is quite big (ca. 28M) you should download it only once and copy it to `/opt/adus/`. Make sure you adapt your `$PATH` to point to `/opt/adus/adus.sh`. Afterwards you should be able to call `adus.sh` system-wide. 
+
 # Run 
 
 ADUS is very easy to use. Have a look at the available options:
@@ -45,6 +49,15 @@ Available options:
 
 
 ~~~
+
+
+# Tested on ...
+
+* Linux 
+* Windows 7
+  + Using [Git Bash](http://msysgit.github.io/)
+
+>Can anyone confirm ADUS running on *BSD?
 
 # Examples
 
@@ -127,4 +140,4 @@ dex2jar unpacked/classes.dex -> ./unpacked/classes-dex2jar.jar
 
 # License
 
-Released under the MIT License. 
+Released under the MIT License. Check out `License.md`.
