@@ -239,6 +239,27 @@ function apk_dex2jar {
     fi
 }
 
+## Clean directories
+function clean {
+    log INFO "Cleaning directories (unpack/source) ..."
+    cmd="rm -rf $DIR_UNPACK $DIR_SOURCE"
+    
+    # Check for verbosity
+    if (( ! verbose )); then
+        cmd="$cmd > /dev/null 2>&1"
+    fi
+
+    eval $cmd
+    
+    # Check for errors
+    if [ $? -ne 0 ]; then
+        log ERROR "Couldn't delete directories."
+    else
+        log INFO "Success! Deleted directories."
+    fi
+    
+}
+
 ## Prints this script help description message
 function adus_usage {
     echo ""
@@ -254,6 +275,7 @@ function adus_usage {
     echo "Available options:"
     echo -ne " -h \t\t\t\t Print this message\n"
     echo -ne " -b <app_path> \t\t\t Build new APK from source directory\n"
+    echo -ne " -c \t\t\t\t Clean: Delete $DIR_UNPACK and $DIR_SOURCE\n"
     echo -ne " -d <app_path> \t\t\t Dump APK to $DIR_SOURCE\n"
     echo -ne " -s <app_path> \t\t\t Sign APK using test certificate\n"
     echo -ne " -u <app_path> \t\t\t Unpack APK to $DIR_UNPACK\n"
@@ -267,7 +289,7 @@ function adus_usage {
 
 
 # Check for arguments
-while getopts ":b:d:s:u:x:0:1:q" o; do
+while getopts ":b:d:s:u:x:0:1:q:c" o; do
     case "${o}" in
         h|\?)
             adus_usage
@@ -276,6 +298,9 @@ while getopts ":b:d:s:u:x:0:1:q" o; do
         b)
             b=${OPTARG}
             apk_build $b
+            ;;
+        c)
+            clean
             ;;
         d)
             d=${OPTARG}
