@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Adus by dorneanu</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/dorneanu/adus">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/dorneanu/adus/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/dorneanu/adus/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Adus</h1>
+          <p>Android Debug Utility Suite</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/dorneanu">dorneanu</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="motivation" class="anchor" href="#motivation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h1>
+
+<p>After having written my <a href="http://blog.dornea.nu/2014/08/21/howto-debug-android-apks-with-eclipse-and-ddms/">post</a> on debugging with Eclipse and DDMS, I wanted to somehow automate those steps. And this is how
+ADUS got born. </p>
+
+<p>Its basically only a BASH script ment to glue things together and make my life easier. Feel free to adapt it to your needs. Pull requests are highly welcome.</p>
+
+<h1>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h1>
+
+<ul>
+<li>
+<em>adus.sh</em>
+
+<ul>
+<li>bash :)</li>
+</ul>
+</li>
+<li>
+<em>apktool</em>
+
+<ul>
+<li>Java &gt;= 1.7.x (<a href="https://code.google.com/p/android-apktool/wiki/BuildApktool#Requirements">link</a>)</li>
+<li>aapt (Android Asset Packaging Tool) in $PATH (usually found in android-sdk/build-tools/*)</li>
+</ul>
+</li>
+<li>
+<em>signapk</em>
+
+<ul>
+<li>no specific requirements</li>
+</ul>
+</li>
+<li>
+<em>dex2jar</em>
+
+<ul>
+<li>no specific requirements</li>
+</ul>
+</li>
+</ul>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<p>You can download/clone the package wherever you want and call <code>./adus.sh</code> from there. Since the GIT repo is quite big (ca. 28M) you should download it only once and copy it to <code>/opt/adus/</code>. Make sure you adapt your <code>$PATH</code> to point to <code>/opt/adus/adus.sh</code>. Afterwards you should be able to call <code>adus.sh</code> system-wide. </p>
+
+<h1>
+<a id="run" class="anchor" href="#run" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run</h1>
+
+<p>ADUS is very easy to use. Have a look at the available options:</p>
+
+<div class="highlight highlight-shell"><pre>
+            __   ____  _  _  ____  
+           / _<span class="pl-cce">\ </span>(    <span class="pl-cce">\/</span> )( <span class="pl-cce">\/</span> ___) 
+          /    <span class="pl-cce">\ </span>) <span class="pl-en">D</span> () <span class="pl-cce">\/</span> (<span class="pl-cce">\_</span>__ <span class="pl-cce">\ </span>
+          <span class="pl-cce">\_</span>/<span class="pl-cce">\_</span>/(____/<span class="pl-cce">\_</span>___/(____/ 
+
+      [A]ndroid [D]ebug [U]tility [S]uite
+
+Usage: ./adus.sh <span class="pl-k">&lt;</span>options<span class="pl-k">&gt;</span>
+Available options:
+ -h                      Print this message
+ -b <span class="pl-k">&lt;</span>app_path<span class="pl-k">&gt;</span>           Build new APK from <span class="pl-s3">source</span> directory
+ -d <span class="pl-k">&lt;</span>app_path<span class="pl-k">&gt;</span>           Dump APK to ./source
+ -s <span class="pl-k">&lt;</span>app_path<span class="pl-k">&gt;</span>           Sign APK using <span class="pl-s3">test</span> certificate
+ -u <span class="pl-k">&lt;</span>app_path<span class="pl-k">&gt;</span>           Unpack APK to ./unpacked
+ -x <span class="pl-k">&lt;</span>dex_path<span class="pl-k">&gt;</span>           Convert DEX to JAR
+ -q                      Be quite. Deactivate verbosity.
+ -0 <span class="pl-k">&lt;</span>app_path<span class="pl-k">&gt;</span>           Dump (-d) and unpack (-u) APK
+ -1 <span class="pl-k">&lt;</span>app_path<span class="pl-k">&gt;</span>           Build (-b) and sign (-s)
+
+</pre></div>
+
+<h1>
+<a id="tested-on-" class="anchor" href="#tested-on-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tested on ...</h1>
+
+<ul>
+<li>Linux </li>
+<li>Windows 7
+
+<ul>
+<li>Using <a href="http://msysgit.github.io/">Git Bash</a>
+</li>
+</ul>
+</li>
+</ul>
+
+<blockquote>
+<p>Can anyone confirm ADUS running on *BSD?</p>
+</blockquote>
+
+<h1>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h1>
+
+<h3>
+<a id="unpack-and-dump-apk" class="anchor" href="#unpack-and-dump-apk" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unpack and dump APK</h3>
+
+<p>Given an APK ADUS will dump the contents to <code>./source</code> using <code>apktool</code>. Afterwards it will unpack the APK (=ZIP file) to <code>./unpacked</code> using <code>unzip</code>. The <code>-0</code> command is actually a combo of <code>-d</code> and <code>-u</code>.</p>
+
+<div class="highlight highlight-shell"><pre><span class="pl-c"># ./adus.sh -0 FakeBanker.apk </span>
+[2014-09-04 20:48:35] INFO: Dumping FakeBanker.apk to ./source ... 
+I: Using Apktool 2.0.0-dirty on FakeBanker.apk
+I: Loading resource table...
+I: Loading resource table...
+I: Decoding AndroidManifest.xml with resources...
+I: Loading resource table from file: /home/victor/apktool/framework/1.apk
+I: Regular manifest package...
+I: Decoding file-resources...
+I: Decoding values <span class="pl-k">*</span>/<span class="pl-k">*</span> XMLs...
+I: Baksmaling classes.dex...
+I: Copying assets and libs...
+I: Copying unknown files...
+I: Copying original files...
+[2014-09-04 20:48:39] INFO: Success<span class="pl-k">!</span>
+[2014-09-04 20:48:39] INFO: Unpacking FakeBanker.apk to ./unpacked ... 
+Archive:  FakeBanker.apk
+signed by SignApk
+  inflating: ./unpacked/META-INF/MANIFEST.MF  
+  inflating: ./unpacked/META-INF/CERT.SF  
+  inflating: ./unpacked/META-INF/CERT.RSA  
+  inflating: ./unpacked/AndroidManifest.xml  
+  inflating: ./unpacked/classes.dex  
+ extracting: ./unpacked/res/drawable-hdpi/ic_launcher1.png  
+ extracting: ./unpacked/res/drawable-hdpi/logo.png  
+ extracting: ./unpacked/res/drawable-ldpi/ic_launcher1.png  
+ extracting: ./unpacked/res/drawable-mdpi/ic_launcher1.png  
+ extracting: ./unpacked/res/drawable-xhdpi/ic_launcher1.png  
+  inflating: ./unpacked/res/layout/actup.xml  
+  inflating: ./unpacked/res/layout/main.xml  
+  inflating: ./unpacked/res/layout/main2.xml  
+  inflating: ./unpacked/res/menu/main.xml  
+ extracting: ./unpacked/res/raw/blfs.key  
+  inflating: ./unpacked/res/raw/config.cfg  
+  inflating: ./unpacked/resources.arsc  
+[2014-09-04 20:48:39] INFO: Success<span class="pl-k">!</span></pre></div>
+
+<h3>
+<a id="build-and-sign-new-apk" class="anchor" href="#build-and-sign-new-apk" aria-hidden="true"><span class="octicon octicon-link"></span></a>Build and sign new APK</h3>
+
+<p>ADUS will build a new APK from <code>./source</code> and sign it using <code>signapk</code>. The <code>-1</code> command consists of <code>-b</code> and <code>-s</code>.</p>
+
+<div class="highlight highlight-shell"><pre>./adus.sh -1 FakeBanker-NEW.apk
+[2014-09-04 20:52:01] INFO: Building APK from ./source ... 
+
+I: Using Apktool 2.0.0-dirty on <span class="pl-s3">source</span>
+I: Checking whether sources has changed...
+I: Smaling smali folder into classes.dex...
+I: Checking whether resources has changed...
+I: Building resources...
+Warning: AndroidManifest.xml already defines debuggable (<span class="pl-k">in</span> http://schemas.android.com/apk/res/android)<span class="pl-k">;</span> using existing value <span class="pl-k">in</span> manifest.
+I: Building apk file...
+[2014-09-04 20:52:06] INFO: Success<span class="pl-k">!</span> FakeBanker-NEW.apk is your new APK.
+[2014-09-04 20:52:06] INFO: Signing FakeBanker-NEW.apk ...
+[2014-09-04 20:52:06] INFO: Success<span class="pl-k">!</span> FakeBanker-NEW.SIGNED.apk is your signed APK.</pre></div>
+
+<h3>
+<a id="convert-dex-to-jar" class="anchor" href="#convert-dex-to-jar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Convert dex to jar</h3>
+
+<p>Using dex2jar you'll be able to convert the <code>classes.dex</code> into a <code>jar</code> file.</p>
+
+<div class="highlight highlight-shell"><pre>./adus.sh -x unpacked/classes.dex
+[2014-09-04 20:53:14] INFO: Converting unpacked/classes.dex to JAR ... 
+dex2jar unpacked/classes.dex -<span class="pl-k">&gt;</span> ./unpacked/classes-dex2jar.jar
+[2014-09-04 20:53:17] INFO: Success<span class="pl-k">!</span> Converted file is at ./unpacked/classes-dex2jar.jar</pre></div>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
+
+<p>Released under the MIT License. Check out <code>License.md</code>.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
