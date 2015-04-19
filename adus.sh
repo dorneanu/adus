@@ -41,7 +41,7 @@ function check_command {
 ## Configuration stuff
 
 # Dirctories
-CWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+CWD=$( cd "$( dirname $( readlink "${BASH_SOURCE[0]}" ))" && pwd )
 DIR_TOOLS=$CWD/tools
 DIR_UNPACK=./unpacked
 DIR_SOURCE=./source
